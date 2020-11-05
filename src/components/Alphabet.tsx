@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme: Theme) =>
         root: {
             backgroundColor: '#E9E9E9',
             padding: 10,
-            paddingLeft: 10,
+            paddingLeft: 9,
         },
         button: {
             padding: 7,
@@ -24,7 +24,7 @@ interface Props {
 
 }
 
-export const Alphabet: React.FC<Props> = ({}) => {
+export const Alphabet: React.FC<Props> = () => {
     const classes = useStyles();
     const letters = "abcdefghijklmnopqrstuvwxyz".split('');
     return (

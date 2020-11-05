@@ -53,7 +53,7 @@ const handleChange = (prop: keyof State) => (event: React.ChangeEvent<HTMLInputE
                 onChange={handleChange('contact')}
                 InputProps={{
                   startAdornment: <InputAdornment position="start">
-                                      <SearchIcon style={{color: '#C6C6C6'}} />
+                                      <SearchIcon style={{color: '#A7B8B7'}} />
                                   </InputAdornment>,
                   classes: { input: classes.searchField } 
                 }}

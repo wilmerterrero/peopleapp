@@ -20,10 +20,11 @@ const useStyles = makeStyles((theme: Theme) =>
 interface Props {
    search?: React.ReactNode;
    alphabet?: React.ReactNode;
+   contacts?: React.ReactNode;
 }
 
 export const Layout: React.FC<Props> = (props) => {
-  const { search, alphabet } = props;
+  const { search, alphabet, contacts } = props;
   const classes = useStyles();
 
   return (
@@ -32,6 +33,7 @@ export const Layout: React.FC<Props> = (props) => {
       <Grid container spacing={1}>
         <Grid item xs={11}>
              { search }
+             { contacts }
         </Grid>
         <Grid item xs={1}>
             { alphabet }
