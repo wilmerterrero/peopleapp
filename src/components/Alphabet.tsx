@@ -35,12 +35,12 @@ export const Alphabet: React.FC<Props> = () => {
                 key="dot"
             >&bull;</IconButton>
         {
-            letters.map((letter, i) => {
+            letters.map((letter, key) => {
                 return (
                     <IconButton 
                         size='small' 
                         className={classes.button}
-                        key={i}
+                        key={key}
                     >{letter.toUpperCase()}</IconButton>
                 )
             })

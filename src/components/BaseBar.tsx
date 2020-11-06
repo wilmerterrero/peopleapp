@@ -38,7 +38,7 @@ interface Props {
 
 }
 
-export const Bar: React.FC<Props> = ({}) => {
+export const BaseBar: React.FC<Props> = () => {
 
     React.useEffect(() => {
       const node = loadCSS(

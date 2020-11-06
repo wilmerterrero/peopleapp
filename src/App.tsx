@@ -1,26 +1,16 @@
 import React from 'react';
-import { Alphabet } from './components/Alphabet';
-import { Bar } from './components/Bar';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Base } from './components/Base';
 import { Contact } from './components/Contact';
-import { Layout } from './components/Layout';
-import { Search } from './components/Search';
 
 function App() {
   return (
-    <>
-      <Bar />
-      <Layout 
-        search={
-          <Search onSubmit={() => {}}/>
-        }
-        alphabet={
-          <Alphabet />
-        }
-        contacts={
-          <Contact />
-        }
-      />
-    </>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Base} />
+        <Route exact path="/contact" component={Contact} />
+      </Switch>
+    </Router>   
   );
 }
 
