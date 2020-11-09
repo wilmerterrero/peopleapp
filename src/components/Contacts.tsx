@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { loadCSS } from 'fg-loadcss';
 import Avatar from '@material-ui/core/Avatar';
@@ -27,11 +27,15 @@ const useStyles = makeStyles((theme: Theme) =>
     )
 );
 
-interface Props {
-
+interface IContact {
+    id: string,
+    name: string,
+    phone: number
 }
 
-export const Contacts: React.FC<Props> = () => {
+export const Contacts: React.FC = () => {
+
+    const [contacts, setContacts] = useState<IContact[]>(JSON.parse(window.localStorage.getItem('contact') || '{}'));
 
     React.useEffect(() => {
       const node = loadCSS(
@@ -52,25 +56,31 @@ export const Contacts: React.FC<Props> = () => {
                 Favorites
             </Typography>
             <div className={classes.contacts}>
-                <Grid container>
+                {
+                
+                    Array.from(contacts).map((contact: IContact) => (
+                <Grid container key={contact.id}>
                     <Grid item xs={3}>
                         <Avatar variant="rounded" className={classes.rounded}>
-                            N
+                            {contact.name[0]}
                         </Avatar>
                     </Grid>
                     <Grid item xs={6}>
                         <Typography variant="subtitle1" component="p" style={{ fontWeight: 'bold', color: '#0E1B25' }}>
-                            Noe Hernandez 
+                            {contact.name}
                         </Typography>
                         <Typography variant="subtitle1" component="p" style={{ color: '#ACACAC' }}>
-                            +321 9199200129
+                            {contact.phone}
                         </Typography>
                     </Grid>
                     <Grid item xs={2}>
                         <Icon className="fas fa-phone-volume" style={{ fontSize: 40, color: '#DFDFDF', margin: 4, transform: `rotate(-30deg)`  }} />
                     </Grid>
                 </Grid>
-            </div>
+                    ))
+                }
+
+           </div>
        </div>
     );
 }

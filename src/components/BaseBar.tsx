@@ -60,14 +60,29 @@ export const BaseBar: React.FC<Props> = () => {
               elevation={0}
             >
                 <Toolbar>
-                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                <IconButton 
+                  edge="start" 
+                  className={classes.menuButton} 
+                  color="inherit" 
+                  aria-label="menu"
+                >
                   <Icon className="fas fa-cog" />
                 </IconButton>
-                <Typography variant="h5" className={classes.title} style={{ textAlign: 'center', fontWeight: 'bold' }}>
+                <Typography 
+                  variant="h5" 
+                  className={classes.title} 
+                  style={{ textAlign: 'center', fontWeight: 'bold', cursor: 'pointer' }}
+                  onClick={() => { window.location.href = '/' }}
+                >
                   People
                 </Typography>
-                <ConfigButton>
-                  <Icon className="fas fa-plus plusIcon" style={{ fontSize: 18, color: '#EE5B2D', margin: 4  }} />
+                <ConfigButton
+                  onClick={() => { window.location.href = '/create' }}
+                >
+                  <Icon 
+                    className="fas fa-plus plusIcon" 
+                    style={{ fontSize: 18, color: '#EE5B2D', margin: 4, cursor: 'pointer'  }} 
+                  />
                 </ConfigButton>
                 </Toolbar>
             </StyledBar>
