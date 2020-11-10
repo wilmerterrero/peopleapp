@@ -1,6 +1,9 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { loadCSS } from 'fg-loadcss';
+
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -38,10 +41,12 @@ const StyledBar = withStyles({
 
 
 interface Props {
-
+  id: any
 }
 
-export const ContactBar: React.FC<Props> = () => {
+export const ContactBar: React.FC<Props> = (props) => {
+
+    const { id } =  props;
 
     React.useEffect(() => {
       const node = loadCSS(
@@ -54,6 +59,8 @@ export const ContactBar: React.FC<Props> = () => {
       };
     }, []);
 
+    let history = useHistory();
+
     const classes = useStyles();
 
     return (
@@ -63,13 +70,23 @@ export const ContactBar: React.FC<Props> = () => {
               elevation={0}
             >
                 <Toolbar>
-                  <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                    <Icon className="fas fa-chevron-left" />
+                  <IconButton 
+                    edge="start" 
+                    className={classes.menuButton} 
+                    color="inherit" 
+                    aria-label="menu"
+                    onClick={() => { history.push('/') }}
+                   >
+                    <Icon 
+                      className="fas fa-chevron-left" 
+                    />
                   </IconButton>
                   <Typography variant="h5" className={classes.title} style={{ textAlign: 'center', fontWeight: 'bold' }}>
                     Contact Info
                   </Typography>
-                  <ConfigButton>
+                  <ConfigButton
+                    onClick={() => { history.push(`/edit/${id}`) }}
+                  >
                     Edit
                   </ConfigButton>
                 </Toolbar>

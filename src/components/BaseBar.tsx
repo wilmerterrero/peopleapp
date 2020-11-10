@@ -1,6 +1,9 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { loadCSS } from 'fg-loadcss';
+
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -33,12 +36,7 @@ const StyledBar = withStyles({
   }
 })(AppBar);
 
-
-interface Props {
-
-}
-
-export const BaseBar: React.FC<Props> = () => {
+export const BaseBar: React.FC = () => {
 
     React.useEffect(() => {
       const node = loadCSS(
@@ -50,6 +48,8 @@ export const BaseBar: React.FC<Props> = () => {
         node.parentNode!.removeChild(node);
       };
     }, []);
+
+    let history = useHistory(); 
 
     const classes = useStyles();
 
@@ -72,12 +72,12 @@ export const BaseBar: React.FC<Props> = () => {
                   variant="h5" 
                   className={classes.title} 
                   style={{ textAlign: 'center', fontWeight: 'bold', cursor: 'pointer' }}
-                  onClick={() => { window.location.href = '/' }}
+                  onClick={() => { history.push('/') }}
                 >
                   People
                 </Typography>
                 <ConfigButton
-                  onClick={() => { window.location.href = '/create' }}
+                  onClick={() => { history.push('/create') }}
                 >
                   <Icon 
                     className="fas fa-plus plusIcon" 

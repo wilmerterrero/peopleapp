@@ -23,19 +23,16 @@ interface Props {
 }
 
 export const Layout: React.FC<Props> = (props) => {
-  const { search, alphabet, contacts } = props;
+  const { search, contacts } = props;
   const classes = useStyles();
 
   return (
     <Container maxWidth="sm">
      <div className={classes.root}>
-      <Grid container spacing={1}>
-        <Grid item xs={11}>
+      <Grid container>
+        <Grid item xs={12}>
              { search }
              { contacts }
-        </Grid>
-        <Grid item xs={1}>
-            { alphabet }
         </Grid>
       </Grid>
     </div>

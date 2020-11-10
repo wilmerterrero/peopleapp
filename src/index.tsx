@@ -1,11 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import { createStore, applyMiddleware, Store } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import reportWebVitals from './reportWebVitals';
+
+import { composeWithDevTools } from "redux-devtools-extension/logOnlyInProduction";
+
+import App from './App';
+import reducer from './store/contactReducer';
+
+const store: Store<ContactState, ContactAction> & {
+  dispatch: DispatachType
+} = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,5 +1,11 @@
 import React, { useState } from 'react'
-import { v1 as uuid } from 'uuid';
+
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
+import { addContact } from '../store/contactActions';
+
+import { nanoid } from 'nanoid';
+
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { BaseBar } from './BaseBar';
 import { Button, TextField, Typography } from '@material-ui/core';
@@ -18,31 +24,45 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-export const NewContact: React.FC = () => {
-    const [contact, setContact] = useState({ id: uuid(), name: '', phone: 0 });
+export const AddContact: React.FC = () => {
+    const [contact, setContact] : any  = useState<IContact | {}>({
+        id: '', name: '', phone: 0
+    });
+    const [id] = useState(nanoid);
     const [error, setError] = useState(false);
     const [formstatus, setFormStatus] = useState(false);
 
-    const { name, phone } = contact;
+    const dispatch: Dispatch<any> = useDispatch();
+
+    const saveContact = React.useCallback(
+      (contact: IContact | any) => dispatch(addContact(contact)),
+      [dispatch]      
+    )
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setContact({
-           ...contact, [e.target.name] : e.target.value
+           ...contact, 
+           [e.target.name] : e.target.value
         })
     }
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        //Validation
-        if (name.trim() === '' && phone <= 0 ) {
+        if(contact.name === "" && contact.phone <= 0){
             setError(true);
             return;
         }
 
         setFormStatus(true);
 
-        window.localStorage.setItem('contact', JSON.stringify(contact));
+        const newContact = {
+            id: id,
+            name: contact.name,
+            phone: contact.phone
+        }
+
+        saveContact(newContact)
 
         setTimeout(() => {
             window.location.href = '/';
