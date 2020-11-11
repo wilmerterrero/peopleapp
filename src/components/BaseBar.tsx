@@ -11,6 +11,8 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import { Icon } from '@material-ui/core';
 
+const themes = localStorage.getItem("theme") || "#EE5B2D";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -32,11 +34,17 @@ const ConfigButton = withStyles({
 
 const StyledBar = withStyles({
   root: {
-    background: '#EE5B2D',
+    background: themes,
   }
 })(AppBar);
 
-export const BaseBar: React.FC = () => {
+interface Props {
+  title: string
+}
+
+export const BaseBar: React.FC<Props> = (props) => {
+
+    const { title } = props;
 
     React.useEffect(() => {
       const node = loadCSS(
@@ -65,6 +73,7 @@ export const BaseBar: React.FC = () => {
                   className={classes.menuButton} 
                   color="inherit" 
                   aria-label="menu"
+                  onClick={() => history.push('/config')} 
                 >
                   <Icon className="fas fa-cog" />
                 </IconButton>
@@ -72,16 +81,17 @@ export const BaseBar: React.FC = () => {
                   variant="h5" 
                   className={classes.title} 
                   style={{ textAlign: 'center', fontWeight: 'bold', cursor: 'pointer' }}
-                  onClick={() => { history.push('/') }}
+                  onClick={() => history.push('/') }
                 >
-                  People
+                  { title } 
                 </Typography>
                 <ConfigButton
-                  onClick={() => { history.push('/create') }}
+                  onClick={() => history.push('/create') }
+                  title="New contact"
                 >
                   <Icon 
                     className="fas fa-plus plusIcon" 
-                    style={{ fontSize: 18, color: '#EE5B2D', margin: 4, cursor: 'pointer'  }} 
+                    style={{ fontSize: 18, color: themes, margin: 4, cursor: 'pointer'  }} 
                   />
                 </ConfigButton>
                 </Toolbar>

@@ -5,6 +5,8 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { BaseBar } from './BaseBar';
 import { Button, InputLabel, TextField, Typography } from '@material-ui/core';
 
+const theme = localStorage.getItem("theme") || "#EE5B2D";
+
 const useStyles = makeStyles((theme: Theme) => 
     createStyles({
         root: {
@@ -54,7 +56,7 @@ export const EditContact: React.FC = () => {
     const classes = useStyles();
     return (
         <>
-            <BaseBar />
+            <BaseBar title={contact.name} />
             <div className={classes.root}>
                 <Typography variant="h6">Contact edition</Typography>
                 <form
@@ -149,7 +151,7 @@ export const EditContact: React.FC = () => {
                     />
                     <Button
                         fullWidth
-                        style={{ backgroundColor: '#EE5B2D', color: '#fff' }}
+                        style={{ backgroundColor: theme, color: '#fff' }}
                         type="submit"
                     >Edit</Button>
                </form>

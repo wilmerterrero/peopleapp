@@ -7,6 +7,8 @@ import SearchIcon from "@material-ui/icons/Search";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 
+const theme = localStorage.getItem("theme") || "#EE5B2D";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -47,7 +49,22 @@ export const Contacts: React.FC = () => {
       ...search,
       [e.target.name]: e.target.value,
     });
+
+    searchByName();
+
   };
+
+  const searchByName = () => {
+    if(search.contact.length >= 1) {
+      const contactFound = contacts.filter((contact: IContact) =>
+        contact.name
+        .toLowerCase()
+        .includes(search.contact.toLowerCase())
+      );
+      setContacts(contactFound);
+    }
+  }
+
 
   const classes = useStyles();
 
@@ -73,7 +90,7 @@ export const Contacts: React.FC = () => {
       <Typography
         variant="subtitle1"
         component="h2"
-        style={{ fontWeight: "bold", color: "#EE5B2D" }}
+        style={{ fontWeight: "bold", color: theme }}
       >
         My Contacts
       </Typography>

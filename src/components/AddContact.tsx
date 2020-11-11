@@ -8,11 +8,16 @@ import { BaseBar } from './BaseBar';
 import { Button, TextField, Typography } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 
+const themes = localStorage.getItem("theme") || "#EE5B2D";
+
 const useStyles = makeStyles((theme: Theme) => 
     createStyles({
         root: {
             '& > *': {
                 margin: theme.spacing(1)
+            },
+            '& > button': {
+                backgroundColor: themes
             }
         },
         input: {
@@ -66,7 +71,7 @@ export const AddContact: React.FC = () => {
     const classes = useStyles();
     return (
         <>
-            <BaseBar />
+            <BaseBar title="Create contact" />
             <div className={classes.root}>
                 { formstatus && 
                   error === false &&
@@ -115,7 +120,7 @@ export const AddContact: React.FC = () => {
                     />
                     <Button
                         fullWidth
-                        style={{ backgroundColor: '#EE5B2D', color: '#fff' }}
+                        style={{ backgroundColor: themes, color: '#fff' }}
                         type="submit"
                     >Create</Button>
                </form>

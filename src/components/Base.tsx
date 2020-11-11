@@ -6,7 +6,7 @@ import { Layout } from './Layout';
 export const Base: React.FC = () => {
     return (
      <>
-        <BaseBar />
+        <BaseBar title="People" />
         <Layout 
             contacts={
                 <Contacts />

@@ -8,6 +8,8 @@ import Avatar from "@material-ui/core/Avatar";
 import { ContactBar } from "./ContactBar";
 import { Grid, Icon, IconButton, Typography } from "@material-ui/core";
 
+const themes = localStorage.getItem("theme") || "#EE5B2D";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -25,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     item: {
       padding: 3,
-      color: "#F7AB94",
+      color: themes,
     },
     contactHeader: {
       paddingTop: 20,
@@ -45,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     divider: {
       margin: `5px 0 0 ${theme.spacing(1)}px`,
-      borderTop: "1px solid #F2977F",
+      borderTop: `1px solid ${themes}`,
     },
     modal: {
       fontFamily: "Roboto",
@@ -125,7 +127,7 @@ export const FullContact: React.FC<Props> = () => {
             <Grid item xs={3}>
               <Icon
                 className={`far fa-comment-dots`}
-                style={{ color: "#EE5B2D" }}
+                style={{ color: themes }}
               />
             </Grid>
             <Grid item xs={5}>
@@ -149,7 +151,7 @@ export const FullContact: React.FC<Props> = () => {
             <Grid item xs={3}>
               <Icon
                 className={`far fa-comment-dots`}
-                style={{ color: "#EE5B2D" }}
+                style={{ color: themes }}
               />
             </Grid>
             <Grid item xs={5}>
@@ -209,7 +211,7 @@ export const FullContact: React.FC<Props> = () => {
             <Grid item xs={3}>
               <Icon
                 className={`fas fa-map-marked-alt`}
-                style={{ color: "#EE5B2D" }}
+                style={{ color: themes }}
               />
             </Grid>
             <Grid item xs={2} style={{ paddingRight: 162 }}>

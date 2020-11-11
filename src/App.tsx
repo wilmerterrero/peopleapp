@@ -4,6 +4,7 @@ import { Base } from './components/Base';
 import { FullContact } from './components/FullContact';
 import { EditContact } from './components/EditContact';
 import { AddContact } from './components/AddContact';
+import { Config } from './components/Config';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <Route exact path="/contact/:id" component={FullContact} />
         <Route exact path="/create" component={AddContact} />
         <Route exact path="/edit/:id" component={EditContact} />
-        <Route exact path="/delete/:id" component={FullContact} />
+        <Route exact path="/config" component={Config} />
       </Switch>
     </Router>   
   );

@@ -11,6 +11,8 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import { Icon } from '@material-ui/core';
 
+const themes = localStorage.getItem("theme") || "#EE5B2D";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -27,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 const ConfigButton = withStyles({
   root: {
     background: '#ffffff',
-    color: '#EE5B2D',
+    color: themes,
     fontWeight: 'bold',
     textTransform: 'capitalize'
   }
@@ -35,7 +37,7 @@ const ConfigButton = withStyles({
 
 const StyledBar = withStyles({
   root: {
-    background: '#EE5B2D',
+    background: themes,
   }
 })(AppBar);
 

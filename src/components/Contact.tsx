@@ -2,10 +2,11 @@ import React from 'react'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { loadCSS } from 'fg-loadcss';
 import Avatar from '@material-ui/core/Avatar';
-import { deepOrange } from '@material-ui/core/colors';
 import Typography from '@material-ui/core/Typography';
 import { Grid, Icon } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
+
+const themes = localStorage.getItem("theme") || "#EE5B2D";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         rounded: {
                color: '#fff',
-               backgroundColor: deepOrange[500], 
+               backgroundColor: themes, 
                padding: 10 
             }
         }
