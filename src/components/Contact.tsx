@@ -34,7 +34,7 @@ interface Props {
 export const Contact: React.FC<Props> = (props) => {
 
     const { contact } = props;
-    const { name, phone } = contact;
+    const { id, name, phone } = contact;
 
     React.useEffect(() => {
       const node = loadCSS(
@@ -58,7 +58,7 @@ export const Contact: React.FC<Props> = (props) => {
                         <Avatar 
                             variant="rounded" 
                             className={classes.rounded}
-                            onClick={() => { history.push(`/contact/${phone}`) }} 
+                            onClick={() => { history.push(`/contact/${id}`) }} 
                         >
                            { name[0] } 
                         </Avatar>
@@ -68,7 +68,7 @@ export const Contact: React.FC<Props> = (props) => {
                             variant="subtitle1" 
                             component="p" 
                             style={{ fontWeight: 'bold', color: '#0E1B25', cursor: 'pointer' }}
-                            onClick={() => { history.push(`/contact/${phone}`) }}
+                            onClick={() => { history.push(`/contact/${id}`) }}
                         >
                             { name }
                         </Typography>

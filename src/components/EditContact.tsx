@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { BaseBar } from './BaseBar';
@@ -20,31 +20,36 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const EditContact: React.FC = () => {
 
-    let fullcontact: any = JSON.parse(localStorage.getItem('contacts')!);
-    const [contact, setContact] = React.useState<IContact[]>([
-        {
-            id: '',
-            name: '',
-            phone: 0
-        }
-    ]);
-    const { id } : any = useParams();
+    const { id }: any = useParams();
+    let fullcontact: any[] = JSON.parse(localStorage.getItem("contacts") || "[]");
+    const contactById = fullcontact.filter((e) => e.id === id);
+    const [contact, setContact]: any[] = React.useState<any[]>([]);
 
+    const history = useHistory();
+    
     React.useEffect(() => {
-        if(typeof fullcontact === 'object'){
-            setContact(
-                fullcontact.map((contact: IContact) => ( 
-                    contact.phone === id 
-                    ?
-                       contact
-                    :
-                      null 
-                ))
-            )
+        if (contactById) {
+            setContact(contactById[0]);
         }
         //eslint-disable-next-line
-    }, [])
-    console.log(contact)
+    }, []);
+
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault();
+
+        setContact({
+            ...contact,
+            [e.target.name] : e.target.value
+        });
+    }
+
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        
+        localStorage.setItem('contacts', JSON.stringify([contact]));
+
+        history.push('/');
+    }
 
     const classes = useStyles();
     return (
@@ -52,12 +57,15 @@ export const EditContact: React.FC = () => {
             <BaseBar />
             <div className={classes.root}>
                 <Typography variant="h6">Contact edition</Typography>
-                <form>
+                <form
+                    onSubmit={onSubmit}
+                >
                     <InputLabel htmlFor="birthdate">Name</InputLabel>
                     <TextField
                         id="name"
                         name="name"
-                        value={contact[0].name}
+                        value={contact.name}
+                        onChange={onChange}
                         aria-describedby="Contact name"
                         fullWidth
                         variant="outlined"
@@ -67,7 +75,8 @@ export const EditContact: React.FC = () => {
                    <TextField
                        id="phone"
                        name="phone"
-                       value={contact[0].phone}
+                       value={contact.phone}
+                       onChange={onChange}
                        type="tel"
                        placeholder="(000) 000 000"
                        aria-describedby="Contact phone number"
@@ -79,6 +88,8 @@ export const EditContact: React.FC = () => {
                     <TextField
                        id="mobile"
                        name="mobile"
+                       value={contact.mobile}
+                       onChange={onChange}
                        type="tel"
                        placeholder="(000) 000 000"
                        aria-describedby="Contact mobile number"
@@ -90,6 +101,8 @@ export const EditContact: React.FC = () => {
                     <TextField
                         id="birthdate"
                         name="birthdate"
+                        value={contact.birthdate}
+                        onChange={onChange}
                         type="date"
                         aria-describedby="Contact birthdate"
                         fullWidth
@@ -100,6 +113,8 @@ export const EditContact: React.FC = () => {
                     <TextField
                        id="email"
                        name="email"
+                       value={contact.email}
+                       onChange={onChange}
                        type="email"
                        placeholder="wilmer@terrero.com"
                        aria-describedby="Contact personal email"
@@ -111,6 +126,8 @@ export const EditContact: React.FC = () => {
                     <TextField
                        id="workmail"
                        name="workmail"
+                       value={contact.workmail}
+                       onChange={onChange}
                        type="email"
                        placeholder="info@terrero.com"
                        aria-describedby="Contact work email"
@@ -122,6 +139,8 @@ export const EditContact: React.FC = () => {
                     <TextField
                        id="address"
                        name="address"
+                       value={contact.address}
+                       onChange={onChange}
                        placeholder="Address"
                        aria-describedby="Contact address"
                        fullWidth

@@ -7,18 +7,13 @@ interface IContact {
     name: string
     phone: number
     mobile?: number
+    birthdate?: Date
     email?: string
     workmail?: string
     address?: string
 }
 
-type ContactState = {
-    contacts: IContact[]
-    fullcontact?: IContact 
-}
-
 type ContactAction = {
-    type: string
     contact: IContact
 }
 

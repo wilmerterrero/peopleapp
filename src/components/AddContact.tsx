@@ -1,8 +1,5 @@
 import React, { useState } from 'react'
-
-import { useDispatch } from 'react-redux';
-import { Dispatch } from 'redux';
-import { addContact } from '../store/contactActions';
+import { useHistory } from 'react-router-dom';
 
 import { nanoid } from 'nanoid';
 
@@ -25,19 +22,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const AddContact: React.FC = () => {
-    const [contact, setContact] : any  = useState<IContact | {}>({
+    const [contact, setContact] : any = useState<IContact | {}>({
         id: '', name: '', phone: 0
     });
     const [id] = useState(nanoid);
     const [error, setError] = useState(false);
     const [formstatus, setFormStatus] = useState(false);
 
-    const dispatch: Dispatch<any> = useDispatch();
-
-    const saveContact = React.useCallback(
-      (contact: IContact | any) => dispatch(addContact(contact)),
-      [dispatch]      
-    )
+    const history = useHistory();
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setContact({
@@ -61,11 +53,13 @@ export const AddContact: React.FC = () => {
             name: contact.name,
             phone: contact.phone
         }
-
-        saveContact(newContact)
+        
+        const contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
+        let allContacts = [...contacts, newContact]; 
+        localStorage.setItem('contacts', JSON.stringify(allContacts));
 
         setTimeout(() => {
-            window.location.href = '/';
+           history.push('/');
         }, 1500);
     }
 

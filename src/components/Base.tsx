@@ -2,20 +2,12 @@ import React from 'react'
 import { BaseBar } from './BaseBar';
 import { Contacts } from './Contacts';
 import { Layout } from './Layout';
-import { Search } from './Search';
 
-interface Props {
-
-}
-
-export const Base: React.FC<Props> = () => {
+export const Base: React.FC = () => {
     return (
      <>
         <BaseBar />
         <Layout 
-            search={
-              <Search onSubmit={() => {}}/>
-             }
             contacts={
                 <Contacts />
             }
