@@ -17,13 +17,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
-   search?: React.ReactNode;
-   alphabet?: React.ReactNode;
    contacts?: React.ReactNode;
 }
 
 export const Layout: React.FC<Props> = (props) => {
-  const { search, contacts } = props;
+  const { contacts } = props;
   const classes = useStyles();
 
   return (
@@ -31,7 +29,6 @@ export const Layout: React.FC<Props> = (props) => {
      <div className={classes.root}>
       <Grid container>
         <Grid item xs={12}>
-             { search }
              { contacts }
         </Grid>
       </Grid>
