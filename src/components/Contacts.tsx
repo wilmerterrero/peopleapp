@@ -5,6 +5,7 @@ import { FormControl, InputAdornment, TextField } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { Icon } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 
 const theme = localStorage.getItem("theme") || "#EE5B2D";
@@ -24,6 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
       "&::placeholder": {
         fontWeight: "bold",
       },
+    },
+    noContacts: {
+      display: 'flex'
     },
   })
 );
@@ -51,20 +55,16 @@ export const Contacts: React.FC = () => {
     });
 
     searchByName();
-
   };
 
   const searchByName = () => {
-    if(search.contact.length >= 1) {
+    if (search.contact.length >= 1) {
       const contactFound = contacts.filter((contact: IContact) =>
-        contact.name
-        .toLowerCase()
-        .includes(search.contact.toLowerCase())
+        contact.name.toLowerCase().includes(search.contact.toLowerCase())
       );
       setContacts(contactFound);
     }
-  }
-
+  };
 
   const classes = useStyles();
 
@@ -99,9 +99,12 @@ export const Contacts: React.FC = () => {
           <Contact key={index} contact={contact} />
         ))
       ) : (
-        <Typography variant="subtitle1" component="h2">
-          Any contact yet.
-        </Typography>
+        <div className={classes.noContacts}>
+          <Typography variant="subtitle1" component="h2" style={{ fontWeight: 'bold' }}>
+            Any contact yet&nbsp;
+          </Typography>
+          <Icon className="far fa-frown" />
+        </div>
       )}
     </div>
   );
