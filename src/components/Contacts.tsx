@@ -8,7 +8,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Icon } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 
-const theme = localStorage.getItem("theme") || "#EE5B2D";
+const themes = localStorage.getItem("theme") || "#EE5B2D";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -90,7 +90,7 @@ export const Contacts: React.FC = () => {
       <Typography
         variant="subtitle1"
         component="h2"
-        style={{ fontWeight: "bold", color: theme }}
+        style={{ fontWeight: "bold", color: themes }}
       >
         My Contacts
       </Typography>

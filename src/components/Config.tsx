@@ -6,7 +6,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Box, Typography } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 
-const theme = localStorage.getItem("theme") || "#EE5B2D";
+const themeLS = localStorage.getItem("theme") || "#EE5B2D";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -80,7 +80,7 @@ export const Config: React.FC = () => {
         <Typography
           variant="h6"
           component="h2"
-          style={{ fontWeight: "bold", color: theme }}
+          style={{ fontWeight: "bold", color: themeLS }}
         >
           Choose your favorite theme
         </Typography>
