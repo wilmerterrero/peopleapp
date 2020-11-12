@@ -47,8 +47,13 @@ export const EditContact: React.FC = () => {
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        
-        localStorage.setItem('contacts', JSON.stringify([contact]));
+
+        //get the index
+        const selectedIndex = fullcontact.findIndex((contact: IContact) => contact.id === id)
+        //delete the current contact and replace it with the edited contact
+        fullcontact.splice(selectedIndex, 1, contact);
+        //save in localStorage
+        localStorage.setItem('contacts', JSON.stringify(fullcontact));
 
         history.push('/');
     }
