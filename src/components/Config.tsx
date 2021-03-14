@@ -31,6 +31,7 @@ export const Config: React.FC = () => {
     primary: "#EE5B2D",
     secundary: "#2196F3",
     dark: "#000000",
+    neon: "#6f1adf"
   };
 
   const [theme, setTheme] = useState<string>("");
@@ -39,7 +40,7 @@ export const Config: React.FC = () => {
   const classes = useStyles();
   const history = useHistory();
 
-  const { primary, secundary, dark } = themes;
+  const { primary, secundary, dark, neon } = themes;
 
   const onClick = (e: React.MouseEvent<HTMLElement>) => {
     const selectedTheme = e.currentTarget.id;
@@ -53,6 +54,9 @@ export const Config: React.FC = () => {
         break;
       case "dark":
         setTheme(dark);
+        break;
+      case "neon":
+        setTheme(neon)
         break;
       default:
         break;
@@ -93,6 +97,9 @@ export const Config: React.FC = () => {
           </Box>
           <Box id="dark" onClick={onClick} bgcolor="#000000" p={2}>
             Dark
+          </Box>
+          <Box id="neon" onClick={onClick} bgcolor="#6f1adf" p={2}>
+            Neon
           </Box>
         </div>
       </div>
